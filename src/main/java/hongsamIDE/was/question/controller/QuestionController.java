@@ -4,10 +4,7 @@ import hongsamIDE.was.question.domain.QuestionBasic;
 import hongsamIDE.was.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,14 @@ public class QuestionController {
         return questionService.addQuestion(newQuestion);
     }
 
+//    @GetMapping("/question")
+//    public List<QuestionBasic> getAllQuestion() {
+//        return questionService.getAllQuestion();
+//    }
+
     @GetMapping("/question")
-    public List<QuestionBasic> getAllQuestion() {
-        return questionService.getAllQuestion();
+    public List<QuestionBasic> getQuestionsOfPage(@RequestParam String button, @RequestParam int level,
+                                                  @RequestParam int index, @RequestParam int size) {
+        return questionService.getPage(button, level, index, size);
     }
 }
